@@ -5,7 +5,7 @@ pipeline {
         stage("Run Frontend") {
             steps {
                 echo 'Executing yarn...'
-                nodejs(version: 'NodeJS23.7.0') {
+                nodejs('NodeJS23.7.0') {
                     bat 'yarn install'  // ✅ Use `bat` instead of `sh`
                 }
             }
