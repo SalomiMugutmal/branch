@@ -1,22 +1,23 @@
-pipeline{
+pipeline {
     agent any
-        stages{
-            stage("run frontend"){
-                steps{
-                    echo 'executing yarn...'
-                    nodejs('NodeJS23.7.0'){
+
+    stages {
+        stage("Run Frontend") {
+            steps {
+                echo 'Executing yarn...'
+                nodejs(version: 'NodeJS23.7.0') {
                     sh 'yarn install'
-                    }
-                      }
-                  }
-            stage("run backend"){
-        steps{
-          echo 'executing gradle....'
-            withGradle(){
-                sh './gradlew -v'
+                }
             }
-              }
         }
-  }
-}
         
+        stage("Run Backend") {
+            steps {
+                echo 'Executing Gradle...'
+                withGradle {
+                    sh './gradlew -v'
+                }
+            }
+        }
+    }
+}
